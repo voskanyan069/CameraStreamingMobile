@@ -34,3 +34,4 @@ google-services.json
 
 # Third-party libs
 opencv/
+jniLibs/
