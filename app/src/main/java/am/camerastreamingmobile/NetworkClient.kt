@@ -30,7 +30,12 @@ class NetworkClient(val host: String, val port: Int) {
     fun read(frameSize: Int, processData: (ByteArray) -> Unit) {
         val readerThread = Thread {
             while (socket.isConnected) {
-                val buffer = receiveSocketData(frameSize)
+                val buffer: ByteArray
+                try {
+                    buffer = receiveSocketData(frameSize)
+                } catch (e: SocketException) {
+                    continue
+                }
                 processData(buffer)
             }
             closeConnection()
@@ -39,14 +44,11 @@ class NetworkClient(val host: String, val port: Int) {
     }
 
     private fun receiveSocketData(frameSize: Int): ByteArray {
+        var lastRead = 0
         var totalRead = 0
         val buffer = ByteArray(frameSize)
         while (totalRead < frameSize) {
-            val lastRead: Int = socketInput.read(
-                buffer,
-                totalRead,
-                frameSize - totalRead
-            )
+            lastRead = socketInput.read(buffer, totalRead, frameSize - totalRead)
             if (lastRead < 0) {
                 Log.e("mLog", "not enough data in stream")
                 closeConnection()
