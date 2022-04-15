@@ -12,9 +12,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CameraStreamingMobile">
+        android:theme="@style/Theme.MaterialComponents.NoActionBar">
         <activity
             android:name=".ClientViewerActivity"
+            android:screenOrientation="landscape"
             android:exported="false" />
         <activity
             android:name=".ClientLoginActivity"

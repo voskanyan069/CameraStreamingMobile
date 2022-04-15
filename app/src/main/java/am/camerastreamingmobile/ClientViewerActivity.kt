@@ -19,7 +19,7 @@ class ClientViewerActivity : AppCompatActivity() {
 
     private lateinit var bitmap: Bitmap
     private lateinit var frameImg: ImageView
-    private lateinit var closeSocketBtn: Button
+    private lateinit var closeSocketBtn: ImageView
 
     private lateinit var networkClient: NetworkClient
 
